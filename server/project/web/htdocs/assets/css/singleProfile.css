@@ -1,0 +1,198 @@
+.content {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    gap: 1.5rem;
+}
+
+/* ===================================== PROFILE ===================================== */
+
+.profile {
+    width: 95%;
+    border: 1px solid var(--hr);
+    border-radius: 1rem;
+    background-color: var(--thirdColor);
+}
+
+.user {
+    display: flex;
+    gap: 1rem;
+    padding: 2rem;
+    position: relative;
+}
+
+.profile-photo {
+    position: relative;
+}
+
+img {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 1rem;
+    object-fit: cover;
+}
+
+.username-info {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding: 0;
+    margin: 0;
+}
+
+.upload {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.upload-btn {
+    margin-bottom: .3rem;
+    color: var(--fifthColor);
+}
+
+.upload-btn::file-selector-button {
+    font-weight: bold;
+    color: #0075FF;
+    background-color: transparent;
+    padding: 0.5em;
+    border: .2rem solid #0075FF;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.upload-btn::file-selector-button:hover {
+    opacity: .6;
+}
+
+/* ===================================== PERSONAL ===================================== */
+
+.personal {
+    width: 95%;
+    border: 1px solid var(--hr);
+    border-radius: 1rem;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: var(--thirdColor);
+}
+
+.section-title {
+    position: absolute;
+    top: 1rem;
+    left: 2rem;
+}
+
+p,
+label {
+    margin-block: -1rem;
+    margin-left: -.5rem;
+    padding: .5rem;
+    color: var(--fourthColor);
+}
+
+#passwordChange {
+    margin-block: -1rem;
+    margin-left: -.5rem;
+    font-size: 1rem;
+    padding: .5rem;
+    border: 1px solid var(--hr);
+    border-radius: 1rem;
+    color: var(--fourthColor);
+    background-color: transparent;
+}
+
+#passwordChange:disabled {
+    border: none;
+}
+
+#visible {
+    display: none;
+    position: absolute;
+    bottom: -.5rem;
+    right: .5rem;
+    cursor: pointer;
+    color: var(--fourthColor);
+    user-select: none;
+}
+
+select {
+    margin: -.5rem;
+    padding: .5rem;
+    font-size: 1rem;
+    background-color: transparent;
+    border: none;
+    color: var(--fourthColor);
+    width: 50%;
+}
+
+option {
+    background-color: var(--thirdColor);
+    padding: 0.5rem;
+}
+
+.editable {
+    border: 1px solid var(--hr);
+    border-radius: 1rem;
+    color: var(--fourthColor);
+}
+
+.left-personal {
+    width: 30%;
+    padding-top: 5rem;
+    padding-left: 3rem;
+    padding-bottom: 3rem;
+}
+
+.right-personal {
+    width: 30%;
+    padding-top: 5rem;
+    padding-left: 3rem;
+    padding-bottom: 3rem;
+}
+
+.changer {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.edit-btn {
+    height: 3rem;
+    width: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 2rem;
+    border: 1px solid var(--hr);
+    color: var(--fifthColor);
+    background-color: transparent;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.edit-btn>span {
+    font-size: 1.1rem;
+    color: var(--fifthColor);
+}
+
+.edit-btn:hover {
+    opacity: .6;
+}
+
+#save {
+    display: none;
+    gap: 1rem;
+}
+
+
+/* ===================================== SETTINGS ANIMATIONS & ICONS ===================================== */

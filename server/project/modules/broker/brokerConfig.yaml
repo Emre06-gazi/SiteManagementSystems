@@ -1,0 +1,7 @@
+listener:
+    port: 500
+    ssl: false
+    cafile: /some/cafile
+    capath: /some/folder
+    certfile: /some/certfile
+    keyfile: /some/key

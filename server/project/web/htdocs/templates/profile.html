@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link href="{{url_for('static', filename='css/main.css')}}" rel="stylesheet" />
+    <link href="{{url_for('static', filename='css/singleProfile.css')}}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+</head>
+
+<body id="profilePage">
+
+    <div class="container">
+        <h1>profil</h1>
+        <div class="content">
+            <div class="profile">
+            <div class="user">
+                <div class="profile-photo">
+                    <img id="output" src="https://xsgames.co/randomusers/assets/avatars/male/78.jpg">
+                </div>
+                <div class="upload">
+                    <div class="profile-photo-info">
+                        <h4>Profil Fotoğrafı</h4>
+                        <h6>Lütfen dosyanızın boyutunun 1MB'tan düşük ve yalnızca .jpg ve .png uzantısında olmasına
+                            dikkat
+                            ediniz.</h6>
+                    </div>
+                    <input class="upload-btn" type="file" name="avatar" accept="image/png, image/jpeg"
+                        onchange="loadFile(event)">
+                </div>
+                <button id="profile-edit-button" class="edit-btn">Düzenle<span
+                        class="material-icons">border_color</span></button>
+            </div>
+        </div>
+            <div class="personal">
+            <div class="section-title">
+                <h3>Kişisel Bilgilerim</h3>
+            </div>
+            <div class="left-personal">
+                <input type="hidden" id="userId" value="{{session['id']}}">
+                <div class="changer">
+                    <h6>Ad</h6>
+                    <p id="firstname" class = "edits" data-original="{{session['firstname']}}">{{session["firstname"]}}</p>
+                </div>
+                <div class="changer">
+                    <h6>Username</h6>
+                    <p id="username" class = "edits" data-original="{{session['username']}}">{{session["username"]}}</p>
+                </div>
+                <div class="changer">
+                    <h6>Görev</h6>
+                    <p id="level">
+                        {% for key, value in session.items() %}
+                            {% if key == 'level' %}
+                                {% if value == 0 %}
+                                    Üst Düzey Yönetici
+                                {% elif value == 1 %}
+                                    Admin
+                                {% elif value == 2 %}
+                                    Site Yöneticisi
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </p>
+                </div>
+            </div>
+            <div class="right-personal">
+                <div class="changer">
+                    <h6>Soyad</h6>
+                    <p id="lastname" class = "edits" data-original="{{session['lastname']}}">{{session["lastname"]}}</p>
+                </div>
+                <div class="changer">
+                    <h6>Tagname</h6>
+                    <p id="tagname" class = "edits" data-original="{{session['tagname']}}">{{session["tagname"]}}</p>
+                </div>
+                <div class="changer">
+                    <h6>Görevli Olduğu Siteler</h6>
+                   <p id="sites">
+                       {% for key, value in session.items() %}
+                            {% if key == 'sites' %}
+                                {% set sites = value | replace('{', '') | replace('}', '') | replace('"', '') | replace(': ', ':') %}
+                                {% set site_list = sites.split(',') %}
+                                {% for site in site_list %}
+                                    {{ site.strip() }}<br>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                   </p>
+                </div>
+            </div>
+            <button id="edit-button" class="edit-btn">Düzenle<span class="material-icons">border_color</span></button>
+        </div>
+        <div id="save">
+                <button id="save-changes-btn" class="saveButton btn">Değişiklikleri Kaydet</button>
+                <button id="cancel-btn" class="cancelButton btn">İptal Et</button>
+            </div>
+        </div>
+    </div>
+    <script src="{{url_for('static', filename='js/profile.js')}}"></script>
+</body>
+
+</html>

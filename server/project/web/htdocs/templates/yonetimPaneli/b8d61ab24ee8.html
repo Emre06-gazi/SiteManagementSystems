@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="/assets/css/main.css" rel="stylesheet" />
+    <link href="{{url_for('static', filename='css/yonetimPaneli/sulama.css')}}" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="full-content">
+        <div class="container">
+            <div id="yonetimEmbed">
+                <div class="container-content">
+                    <div>
+                        <h5>Kayıtlı Senaryolar</h5>
+                        <div class="efendi-content">
+                            {% for scenario_data in scenarios %}
+                                {% for scenario in scenario_data['scenarios'] %}
+                                    <div class="kayitli">
+                                        <span>{{ scenario[0] }}</span>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                            <button onclick="senaryoEkle()" class="ekle-btn">SENARYO EKLE</button>
+                        </div>
+                    </div>
+                    <div>
+                        <h5>Kayıtlı Gruplar</h5>
+
+                        <div class="efendi-content">
+
+                            {% for group_data in groups %}
+                               {% for group in group_data['groups'] %}
+                                <div class="kayitli">
+                                  <span>{{ group['name'] }} --> Pinler= ({{ group['pins'] | join(', ') }})</span>
+                                </div>
+                               {% endfor %}
+                            {% endfor %}
+                            <button onclick="grupEkle()" class="ekle-btn">GRUP EKLE</button>
+                        </div>
+                    </div>
+                    <button class="btn-submit" onclick="submitForm()">BAŞLAT</button>
+                </div>
+            </div>
+            <div id="senaryoPage" class="senaryo-container closePage">
+
+                  <form action="*" method="POST">
+    <fieldset>
+     <legend>Haftanın Günleri</legend>
+      <label for="pazartesi">
+        <input type="checkbox" id="pazartesi" name="gunler[]" value="0"> Pazartesi
+      </label><br>
+      <label for="sali">
+        <input type="checkbox" id="sali" name="gunler[]" value="1"> Salı
+      </label><br>
+      <label for="carsamba">
+        <input type="checkbox" id="carsamba" name="gunler[]" value="2"> Çarşamba
+      </label><br>
+      <label for="persembe">
+        <input type="checkbox" id="persembe" name="gunler[]" value="3"> Perşembe
+      </label><br>
+      <label for="cuma">
+        <input type="checkbox" id="cuma" name="gunler[]" value="4"> Cuma
+      </label><br>
+      <label for="cumartesi">
+        <input type="checkbox" id="cumartesi" name="gunler[]" value="5"> Cumartesi
+      </label><br>
+      <label for="pazar">
+        <input type="checkbox" id="pazar" name="gunler[]" value="6"> Pazar
+      </label><br>
+    </fieldset>
+
+    <fieldset>
+        <legend>Saat Seçimi</legend>
+        <label for="baslangic-saati">Başlangıç Saati:</label>
+        <input type="time" id="baslangic-saati" name="startTime[]"><br>
+        <label for="bitis-saati">Bitiş Saati:</label>
+        <input type="time" id="bitis-saati" name="endTime[]"><br>
+
+          <div id="saatler"></div>
+
+      <button type="button" onclick="saatEkle()">Saat Ekle</button>
+    </fieldset>
+    <fieldset>
+        <legend>Kayitli Gruplar</legend>
+            {% for group_data in groups %}
+            {% for group in group_data['groups'] %}
+                <label>
+                    <input type="checkbox" name="groups[]" value="{{ group['id'] }}"> {{ group['name'] }} ({{ group['pins'] | join(', ') }})
+                </label><br>
+            {% endfor %}
+            {% endfor %}
+    </fieldset>
+     <fieldset>
+      <legend>Senaryo Bilgileri</legend>
+      <label for="senaryo-ismi">Senaryo İsmi:</label>
+      <input type="text" id="senaryo-ismi" name="scenarioName" required>
+    </fieldset>
+
+    <button name="action" value="addScenario">Senaryoyu Kaydet</button>
+  </form>
+                --------
+                <div class="senaryolar">
+                    <div class="senaryo-ekleme-div">
+                        <div class="title">
+                            <span class="geri" onclick="goBack()"></span>
+                            <h5>Senaryo Ayarla</h5>
+                        </div>
+                        <div class="senaryo-ekleme">
+                            <div class="senaryo-content">
+                                <h5>Günler</h5>
+                                <div class="gunler" id="haftanin-gunleri">
+                                    <span>Pzt</span>
+                                    <span>Sal</span>
+                                    <span>Çrş</span>
+                                    <span>Prş</span>
+                                    <span>Cum</span>
+                                    <span>Cmt</span>
+                                    <span>Pzr</span>
+                                </div>
+                                <p id="secili-gunler"></p>
+                            </div>
+                            <div class="senaryo-content">
+                                <h5>Saatler</h5>
+                                <div class="saat-ayarla-div">
+                                    <div id="saat-ayarla"></div>
+                                </div>
+                                <div class="tek-saat-ayarla-div">
+                                    <div id="tek-saat-dropdown">
+                                    </div>
+                                    <div id="saat-alanlari">
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="saat-ekle-button buton-normal ekle-btn">Saat Ekle</button>
+                        </div>
+                    </div>
+                    <h2>Kayıtlı Gruplar</h2>
+                        <div class="kayitli" onclick="seciliGrupDegistir('1,4,5,6')"> <!-- Grup 1 -->
+                            <span>1,4,5,6</span>
+                        </div>
+                        <div class="kayitli" onclick="seciliGrupDegistir('2,3,7,8')"> <!-- Grup 2 -->
+                            <span>2,3,7,8</span>
+                        </div>
+                    <div class="efendi-content">
+                        <div class="senaryo-content">
+                            <div class="senaryo-isim">
+                                <h5 class="senaryo-isimlendirme-baslik">Senaryo Adlandır </h5>
+                            </div>
+                            <div class="senaryo-isim-gir">
+                                <p id="metin"></p>
+                                <input type="text" name="senaryoIsimlendirme" id="inputAlanı"
+                                    placeholder="Senaryo İsmi Oluşturun" oninput="guncelle()">
+                            </div>
+                            <div class="kaydet-butonu">
+                                <button class="senaryo-kaydet buton-normal ekle-btn">Senaryoyu
+                                    Kaydet</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="gruplaPage" class="closePage">
+                <div class="grupla-container">
+                    <div>
+                        <div class="title">
+                            <span class="geri" onclick="goBack()"></span>
+                            <h5>Mevcut Vanalar</h5>
+                        </div>
+                        <div class="grupla-content">
+                            <div class="efendi-content">
+                                <h5>Vana Seç</h5>
+                                <form action="*" method="POST">
+                                    <label class="grup-checkbox-label" for="1">
+                                        <input type="checkbox" id="1" name="pins[]" value="1">1
+                                    </label>
+                                    <label class="grup-checkbox-label" for="3">
+                                        <input type="checkbox" id="3" name="pins[]" value="3">3
+                                    </label>
+                                    <label class="grup-checkbox-label" for="5">
+                                        <input type="checkbox" id="5" name="pins[]" value="5">5
+                                    </label>
+                                    <label class="grup-checkbox-label" for="7">
+                                        <input type="checkbox" id="7" name="pins[]" value="7">7
+                                    </label>
+                                    <label class="grup-checkbox-label" for="9">
+                                        <input type="checkbox" id="9" name="pins[]" value="9">9
+                                    </label>
+                                    <label class="grup-checkbox-label" for="11">
+                                        <input type="checkbox" id="11" name="pins[]" value="11">11
+                                    </label>
+                                    <label class="grup-checkbox-label" for="13">
+                                        <input type="checkbox" id="13" name="pins[]" value="13">13
+                                    </label>
+                                    <label class="grup-checkbox-label" for="15">
+                                        <input type="checkbox" id="15" name="pins[]" value="15">15
+                                    </label>
+                                    <label class="grup-checkbox-label" for="17">
+                                        <input type="checkbox" id="17" name="pins[]" value="17">17
+                                    </label>
+                                    <label class="grup-checkbox-label" for="19">
+                                        <input type="checkbox" id="19" name="pins[]" value="19">19
+                                    </label>
+
+                                    <legend>-Gruba Nem Sensörü Ata-</legend>
+                                    <label for="humidity1">
+                                        <input type="checkbox" id="humidity1"  name="humidity[]" value="dht11">1
+                                    </label>
+                                    <label for="humidity2">
+                                        <input type="checkbox" id="humidity2" name="humidity[]" value="dht11">2
+                                    </label>
+                                    <label for="humidity3">
+                                        <input type="checkbox" id="humidity3" name="humidity[]" value="dht11">3
+                                    </label>
+                                    <label for="humidity4">
+                                        <input type="checkbox" id="humidity4" name="humidity[]" value="dht11">4
+                                    </label>
+
+                                    <input type="text" name="name">
+                                    <button name="group" value="getGroup">Grubu Kaydet</button>
+                                </form>
+                                <br>
+                                ==============
+                                <br>
+                                <div class="inputs">
+                                    <div>
+                                        <label class="grup-checkbox-label" for="checkbox1"><input type="checkbox"
+                                                class="grup-checkbox" id="checkbox1" value="1"
+                                                onclick="updateSelectedValues()">1</label>
+                                    </div>
+                                    <div>
+                                        <label class="grup-checkbox-label" for="checkbox2"><input type="checkbox"
+                                                class="grup-checkbox" id="checkbox2" value="3"
+                                                onclick="updateSelectedValues()">3</label>
+                                    </div>
+                                    <div>
+                                        <label class="grup-checkbox-label" for="checkbox3"><input type="checkbox"
+                                                class="grup-checkbox" id="checkbox3" value="5"
+                                                onclick="updateSelectedValues()">5</label>
+                                    </div>
+                                    <div>
+                                        <label class="grup-checkbox-label" for="checkbox4"><input type="checkbox"
+                                                class="grup-checkbox" id="checkbox4" value="7"
+                                                onclick="updateSelectedValues()">7</label>
+                                    </div>
+                                    <div>
+                                        <label class="grup-checkbox-label" for="checkbox5"><input type="checkbox"
+                                                class="grup-checkbox" id="checkbox5" value="9"
+                                                onclick="updateSelectedValues()">9</label>
+                                    </div>
+                                    <div>
+                                        <label class="grup-checkbox-label" for="checkbox6"><input type="checkbox"
+                                                class="grup-checkbox" id="checkbox6" value="11"
+                                                onclick="updateSelectedValues()">11</label>
+                                    </div>
+                                    <div>
+                                        <label class="grup-checkbox-label" for="checkbox7"><input type="checkbox"
+                                                class="grup-checkbox" id="checkbox7" value="13"
+                                                onclick="updateSelectedValues()">13</label>
+                                    </div>
+                                    <div>
+                                        <label class="grup-checkbox-label" for="checkbox8"><input type="checkbox"
+                                                class="grup-checkbox" id="checkbox8" value="15"
+                                                onclick="updateSelectedValues()">15</label>
+                                    </div>
+                                    <div>
+                                        <label class="grup-checkbox-label" for="checkbox9"><input type="checkbox"
+                                                class="grup-checkbox" id="checkbox9" value="17"
+                                                onclick="updateSelectedValues()">17</label>
+                                    </div>
+                                    <div>
+                                        <label class="grup-checkbox-label" for="checkbox10"><input type="checkbox"
+                                                class="grup-checkbox" id="checkbox10" value="19"
+                                                onclick="updateSelectedValues()">19</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <p id="selectedValues"></p>
+                        </div>
+                    </div>
+                    <div class="efendi-content">
+                        <div class="grupla-content">
+                            <div class="grup-adi-flex">
+                                <h5>Grup Adlandır</h5>
+                            </div>
+                            <input type="text" id="myInput" oninput="updateParagraph()"
+                                placeholder="Grup Adi Oluşturun">
+                            <div class="grup-kaydet-butonu">
+                                <button class="grup-kaydet buton-normal" onclick="logInput()">Grubu Kaydet</button>
+                            </div>
+                            <p id="myParagraph"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+       <script src="{{url_for('static', filename='js/yonetimPaneli/sulama.js')}}"></script>
+</body>
+
+</html>

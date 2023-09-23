@@ -1,0 +1,82 @@
+[
+    {
+        "num": 2,
+        "mode": "RELAY"
+    },
+    {
+        "num": 4,
+        "mode": "RELAY"
+
+    },
+    {
+        "num": 5,
+        "mode": "RELAY"
+
+    },
+    {
+        "num": 12,
+        "mode": "DHT11"
+
+    },
+    {
+        "num": 13,
+        "mode": "DHT11"
+    },
+    {
+        "num": 14,
+        "mode": "RELAY"
+    },
+    {
+        "num": 15,
+        "mode": "DHT11"
+    },
+    {
+        "num": 16,
+        "mode": "RELAY"
+    },
+    {
+        "num": 17,
+        "mode": "RELAY"
+    },
+    {
+        "num": 18,
+        "mode": "RELAY"
+    },
+    {
+        "num": 19,
+        "mode": "RELAY"
+    },
+    {
+        "num": 21,
+        "mode": "RELAY"
+    },
+    {
+        "num": 22,
+        "mode": "RELAY"
+    },
+    {
+        "num": 23,
+        "mode": "RELAY"
+    },
+    {
+        "num": 25,
+        "mode": "RELAY"
+    },
+    {
+        "num": 26,
+        "mode": "RELAY"
+    },
+    {
+        "num": 27,
+        "mode": "RELAY"
+    },
+    {
+        "num": 32,
+        "mode": "DHT11"
+
+    },
+    {
+        "num": 33,
+        "mode": "DHT22"
+    }
+]

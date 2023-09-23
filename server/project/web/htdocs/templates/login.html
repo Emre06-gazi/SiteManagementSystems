@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block pageTitle %}Deneme İndex{% endblock %}
+
+{% block headerCss %}
+    {{ super() }}
+    <link href="{{url_for('static', filename='css/login.css')}}" rel="stylesheet" />
+
+{% endblock %}
+
+{% block headerJs %}
+    {{ super() }}
+{% endblock %}
+
+
+{% block mainContent %}
+<div id="loginPage">
+    <div class="login">
+        <div class="card">
+            <div class="background-image"></div>
+            <div class="left">
+                <div class="left-content">
+                    <h1>Site Yönetimi</h1>
+                    <p>
+                    </p>
+                </div>
+            </div>
+            <div class="right">
+                <h1>Giriş Yap</h1>
+                <div class="form">
+                    <input type="text" id="username" placeholder="Kullanıcı adı" />
+                    <input type="password" id="password" placeholder="Şifre" />
+                    <button onclick="login()">Giriş Yap</button>
+                </div>
+                <a onclick="showForgotPasswordForm()">Şifremi Unuttum</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="forgotPasswordForm" style="display: none;">
+    <h1>Şifremi Unuttum</h1>
+    <div class="form">
+        <input type="text" id="forgotUsername" placeholder="Kullanıcı adı" />
+        <button onclick="sendForgotPasswordEmail()">Form Gönder</button>
+    </div>
+    <p id="forgotPasswordMessage"></p>
+</div>
+
+
+{% endblock %}
+{% block footerJs %}
+{{ super() }}
+
+<script src="{{url_for('static', filename='js/login.js')}}"></script>
+
+{% endblock %}
+

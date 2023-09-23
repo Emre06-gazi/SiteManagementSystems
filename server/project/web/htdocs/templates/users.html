@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="{{url_for('static', filename='css/main.css')}}" rel="stylesheet" />
+    <link href="{{url_for('static', filename='css/users.css')}}" rel="stylesheet" />
+</head>
+<body>
+<div class="container">
+    <h1>kullanıcılar</h1>
+
+        <div class="user-container">
+            <button id="add-panel-button">User Ekle</button>
+            <table>
+
+                <thead>
+                    <th></th>
+                    <th>AD-SOYAD</th>
+                    <th>KULLANICI ADI</th>
+                    <th>SİTE</th>
+                    <th>ROL</th>
+                    <th></th>
+                </thead>
+                {% for user in users -%}
+
+                <tr>
+                    <td class="profile-img">
+                        <img src="https://xsgames.co/randomusers/assets/avatars/male/1.jpg">
+                    </td>
+
+                    <td>
+                        <p class="name">
+                            {{user["firstname"]}} {{user["lastname"]}}
+                        </p>
+
+                    </td>
+                    <td>
+                        <p>@{{user["username"]}}</p>
+                    </td>
+                    <td>
+                        <p>{{user["tagname"]}}</p>
+                    </td>
+                    <td>
+                        <p>{% if user["level"] == 0 %}Ana Yönetici{% elif user["level"] == 1 %}Yönetici{% elif user["level"] == 2 %}Yetkili Kullanıcı{% elif user["level"] == 3 %}Site Yöneticisi{% else %}Bilinmeyen{% endif %}</p>
+                    </td>
+                    <td>
+                        <div class="icons">
+                            <span class="material-icons edit" onclick="loadUserEdit('{{user['id']}}')">edit</span>
+                            <span class="material-icons profile">app_registration</span>
+                            <span class="material-icons delete">delete</span>
+                        </div>
+                    </td>
+                </tr>
+
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="panel" id="panel">
+            <div class="tabs">
+                <button id="add-user">Add</button>
+                <button id="delete-user">Delete</button>
+            </div>
+            <div class="add-container">
+                <div class="input-group">
+                    <form action="*" method="POST">
+                        <div id="addTab">
+                            <h4>Yeni Kullanıcı Ekle</h4>
+                            <div>
+                                <h5>İsim*</h5>
+                                <input type="text" name="firstname" placeholder="İsim Giriniz...">
+                                    <h5>Soyisim*</h5>
+                                    <input type="text" name="lastname" placeholder="Soyisim Giriniz...">
+                                    <h5>Username*</h5>
+                                    <input type="text" name="username" placeholder="Username Giriniz...">
+                                    <h5>Tagname*</h5>
+                                    <input type="text" name="tagname" placeholder="Tagname Giriniz...">
+                                    <h5>Şifre*</h5>
+                                    <input type="password" name="password" placeholder="Şifre Giriniz...">
+                                    <h5>Yönetici Olduğu Siteler - Opsiyonel - Default []</h5>
+                                    <input type="text" name="sites" placeholder="Site İd Giriniz...">
+
+                                    <div class="top-level">
+                                    <h5>--Level-- Opsiyonel (Default 3 = Site Yoneticisi)</h5>
+                                    <input type="text" name="level" placeholder="Level Giriniz...">
+                                    </div>
+                            </div>
+                            <button name="action" value="add">Yeni Kullanıcı Ekle</button>
+                        </div>
+                        <div id="deleteTab">
+                            <h4>Kullanıcı Sil</h4>
+                            <div class="userList">
+                               {% for user in users -%}
+                                    <tr>
+                                        <td><p>
+                                            {{user['id']}}
+                                        </p>
+                                        </td>
+                                        <td>
+                                            <p class="name">
+                                                {{user["firstname"]}} {{user["lastname"]}}
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>@{{user["username"]}}</p>
+                                        </td>
+                                        <td>
+                                            <p>{{user["tagname"]}}</p>
+                                        </td>
+                                        <td>
+                                            <p>{% if user["level"] == 0 %}Ana Yönetici{% elif user["level"] == 1 %}Yönetici{% elif user["level"] == 2 %}Yetkili Kullanıcı{% elif user["level"] == 3 %}Site Yöneticisi{% else %}Bilinmeyen{% endif %}</p>
+                                        </td>
+                                        <td>
+                                            <div class="icons">
+                                                <span class="material-icons edit" onclick="loadUserEdit('{{user['id']}}')">edit</span>
+                                                <button type="submit" class="delete-btn" name="delete" value="action_{{user['id']}}">Sil</button>
+                                                <input type="hidden" name="userId" value="{{user['id']}}">
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    {% endfor %}
+                            </div>
+                        </div>
+                    </form>
+                    <button id="cancelButton">İptal Et</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="{{url_for('static', filename='js/users.js')}}"></script>
+
+</body>
+</html>

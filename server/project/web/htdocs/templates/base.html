@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block pageTitle %}{% endblock %} - ManagementSystem</title>
+
+
+
+    <link href="{{url_for('static', filename='css/main.css')}}" rel="stylesheet" />
+
+    {% block headerCss %}
+
+    {% endblock %}
+
+    {% block headerJs %}
+
+    {% endblock %}
+
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        {% block mainContent %}
+
+        {% endblock %}
+    </div>
+
+
+    <footer>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.min.js"></script>
+        <script type="text/javascript">
+            const server_ip = "{{server_ip}}";
+            {% if socket_name is not none %}
+            const socket = io.connect("{{server_ip}}/{{socket_name}}");
+            {% endif %}
+        </script>
+        <script src="{{url_for('static', filename='js/main.js')}}"></script>
+
+        {% block footerJs %}
+        {% endblock %}
+
+    </footer>
+</body>
+
+
+</html>

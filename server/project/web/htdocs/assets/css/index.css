@@ -1,0 +1,310 @@
+/* -------------SIDEBAR----------------- */
+
+.sidebar {
+    position: fixed;
+    background: var(--thirdColor);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    width: 22rem;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 55;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    transition: .5s;
+}
+
+.sidebar-open {
+    transition: .5s;
+    transform: translate(-18rem, 0rem);
+}
+
+.sidebarClose {
+    transition: .5s;
+    transform: translate(-6rem, 0rem);
+}
+
+/* -------------TITLE CONTENT----------------- */
+
+.mainTitle {
+    height: 10vh;
+    margin-inline: 2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow-wrap: normal;
+    color: var(--primaryColor);
+}
+
+.mainTitle h1 {
+    width: 80%;
+    word-break: keep-all;
+    font-size: 2rem;
+    letter-spacing: -2px;
+    word-wrap: normal;
+    user-select: none;
+    color: var(--secondaryColor);
+}
+
+/* -------------SİTE YÖNETİMİ CONTENT----------------- */
+
+.contentSites {
+    background: var(--thirdColor);
+    height: 100%;
+    max-height: 77vh;
+    overflow-y: auto;
+    margin-left: 2rem;
+    user-select: none;
+    transition: .5s;
+}
+
+.contentTitle {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    color: var(--secondaryColor);
+}
+
+.contentTitle>span {
+    font-size: 2rem;
+}
+
+.contentList {
+    padding-right: 2rem;
+    list-style: none;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--fourthColor);
+}
+
+.contentListItem {
+    display: flex;
+    cursor: pointer;
+    padding: 1.5rem;
+    gap: 1rem;
+    padding-left: 1rem;
+    margin-block: 1rem;
+    border-radius: 2rem;
+}
+
+.contentListItem:hover {
+    background: var(--hover);
+    transition: .5s ease-in-out;
+}
+
+.tree {
+    --spacing: 1.5rem;
+    --radius: 10px;
+    margin-block: 1rem;
+
+}
+
+.tree li {
+    display: block;
+    position: relative;
+    margin-block: .5rem;
+    padding-left: calc(2 * var(--spacing) - var(--radius) - 4px);
+}
+
+.tree ul {
+    margin-left: calc(var(--radius) - var(--spacing));
+    padding-left: 0;
+}
+
+.tree ul li:last-child {
+    border-color: transparent;
+}
+
+summary {
+    display: block;
+    cursor: pointer;
+    margin-left: .5rem;
+}
+
+summary::marker,
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary:focus {
+    outline: none;
+}
+
+.tree li::after,
+summary::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: calc(var(--spacing) /2 - var(--radius) - 1px);
+    left: calc(var(--spacing) - var(--radius));
+    width: calc(2* var(--radius));
+    height: calc(2 * var(--radius));
+}
+
+.tree>li::after,
+.tree>li>details>summary::before {
+    top: calc(var(--spacing) /2 - var(--radius) + 3px);
+}
+
+.tree>li {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+
+.tree li ul {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.tree li ul li ul {
+    font-size: .95rem;
+    font-weight: 500;
+}
+
+.tree li ul li ul li ul {
+    font-weight: 400;
+    font-size: .9rem;
+    border-left: 2px solid var(--secondaryColor);
+    cursor: pointer;
+}
+
+/* -------------LOGOUT CONTENT----------------- */
+
+.logout {
+    width: 80%;
+    height: 10vh;
+    margin-inline: 2rem;
+    background: var(--thirdColor);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--secondaryColor);
+    gap: 1rem;
+    transition: .5s;
+}
+
+.logout>p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    user-select: none;
+    margin-bottom: .5rem;
+}
+
+.userPic {
+    display: flex;
+    width: 50%;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.userPic>img {
+    margin-left: -1rem;
+    margin-right: 1rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.userIcon {
+    font-size: 2.5rem;
+}
+
+/* ------------- CONTENT----------------- */
+
+.content {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: calc(100vh - 2rem);
+    width: calc(100vw - 28rem);
+    background: transparent;
+    transition: .5s;
+}
+
+/* -------------NAVBAR----------------- */
+
+.nav {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    top: 0;
+    right: 0;
+    padding-block: 1rem;
+    height: 4rem;
+    z-index: 999;
+}
+
+.nav-left {
+    font-size: 1.5rem;
+    letter-spacing: -3px;
+    word-wrap: normal;
+    user-select: none;
+    color: var(--blue);
+    margin-left: 2rem;
+}
+
+.nav-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 5rem;
+    gap: 2rem;
+}
+
+.username {
+    color: var(--fourthColor);
+    width: 100%;
+    user-select: none;
+}
+
+.name>h1 {
+    font-size: 1rem;
+}
+
+.name>p {
+    font-size: .8rem;
+}
+
+/* -------------EMBED----------------- */
+
+.embed-container {
+    position: absolute;
+    height: calc(100vh - 4rem);
+    width: 95%;
+    top: 0;
+    z-index: 22;
+    border-radius: 1rem;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    border-radius: 30px;
+}
+
+#ilkIframe {
+    width: 100%;
+    height: 100vh;
+    border-radius: 2rem;
+    position: absolute;
+    top: 0;
+}
+
+.embedOpen {
+    transform: translate(-10rem, 0rem);
+
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--secondaryColor);
+    user-select: none;
+}

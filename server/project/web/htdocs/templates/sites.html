@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="{{url_for('static', filename='css/main.css')}}" rel="stylesheet" />
+    <link href="{{url_for('static', filename='css/sites.css')}}" rel="stylesheet" />
+</head>
+<body>
+ <div class="container">
+     <h1>siteler</h1>
+        <div class="u-container">
+            <div class="user-container">
+                <div class="succes"></div>
+                <table>
+                    <thead>
+                        <th>ID</th>
+                        <th>SİTE ADI</th>
+                        <th></th>
+                        <th>
+                            <button id="addNewSite">Site Ekle / Kaldır</button>
+                        </th>
+                    </thead>
+                    {% for site in sites %}
+                        <tr>
+                            <td>
+                                {{site['id']}}
+                            </td>
+                            <td class="site_name">
+                                {{site['site_name']}}
+                            </td>
+                            <td>
+                                <div class="icons">
+                                    <span class="material-icons edit" onclick="loadSiteEdit('{{site['id']}}')">edit</span>
+                                    <span class="material-icons profile">app_registration</span>
+<!--                                    <span class="material-icons delete" onclick="deleteSite('{{ site['id'] }}')">delete</span>-->
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+        </div>
+
+
+        <div class="panel" id="panel">
+              <button id="add-site-button">Site Ekle</button>
+              <button id="remove-site-button">Site Kaldır</button>
+            <div class="title">
+
+            </div>
+            <div class="ekleme-paneli">
+                <div class="input-group">
+                   <form action="*" method="POST">
+
+                      <div id="addTab" class="tab-container">
+                          <h2>Site Ekle</h2>
+                          <label>Site Adı:</label>
+                          <input type="text" name="siteName" placeholder="Yeni Site Adını Giriniz..." />
+                      <div>
+                        <h4>Sistemler İd Karşılıkları:</h4>
+                        <label>1 = Sulama</label><br>
+                        <label>2 = Işıklandırma</label><br>
+                        <label>3 = Elektrik</label>
+                      </div>
+
+                      <div id="areasContainer">
+                        <div class="area">
+                          <input type="text" name="areaName[]" placeholder="Bölge Adı" />
+                          <input type="text" name="areaSystems[]" placeholder="Sistemler" />
+                        </div>
+                      </div>
+
+                      <div class="buttons">
+                        <button type="button" id="addAreaButton" onclick="addArea()">Bölge Ekle</button>
+                        <button type="submit" id="addButton" class="add-btn" name="action" value="add">Ekle</button>
+                      </div>
+
+                      </div>
+                      <div id="removeTab" class="tab-container-remove">
+                        <table>
+                          <tbody>
+                            {% for site in sites %}
+                            <tr>
+                              <td class="site_name">{{site['site_name']}}</td>
+                              <td>
+                                <div class="icons">
+                                  <button type="submit" class="delete-btn" name="deleteSiteId" value="{{site['id']}}">Sil</button>
+                                </div>
+                              </td>
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                    </form>
+
+                </div>
+            </div>
+            <div class="button-group">
+
+                <button id="cancelButton" class="cancel-btn">İptal Et</button>
+            </div>
+        </div>
+    </div>
+<script src="{{url_for('static', filename='js/sites.js')}}"></script>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="{{url_for('static', filename='css/main.css')}}" rel="stylesheet" />
+    <link href="{{url_for('static', filename='css/canvas.css')}}" rel="stylesheet" />
+</head>
+<body>
+<div class="container">
+    <h1>senaryolar</h1>
+<img src="{{url_for('static', filename='js/canvas/vana.png')}}" style="display: none;">
+    <div class="embed-content" id="embedContent">
+        <div class="canvas-nav">
+            <div class="canvas-sidebar" id="canvasSidebar">
+                <div class="canvas-sidebar-content" id="canvasSidebarContent">
+                    <div class="canvas-sidebar-title ">
+                        <div class="title" id="canvasTitle">
+                            <h1>{{device_id}}</h1>
+                            <p>SULAMA</p>
+                        </div>
+                        <span class="material-icons" id="canvasMenuIcon" onclick="sidebarCloseFunc()">close</span>
+                    </div>
+                    <div class="canvas-content-list" id="canvasList">
+                        <iframe id="controlPanel" src="http://{{server_ip}}/{{device_id}}" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="embed-canvas">
+            <span class="material-icons refresh-button" id="refreshButton">refresh</span>
+            <canvas class="myCanvas">
+            </canvas>
+            <div class="zoom">
+                <span class="material-icons">zoom_out</span>
+                <input type="range" min="1" max="99" value="50" class="slider" id="sliderButton">
+                <span class="material-icons">zoom_in</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.min.js"></script>
+<script type="text/javascript">
+    const deviceSocket = io.connect("{{server_ip}}/canvas/{{device_id}}");
+</script>
+<script src="{{url_for('static', filename='js/canvas/mainStruct.js')}}"></script>
+<script src="{{url_for('static', filename='js/canvas/' + device_id + '.js')}}"></script>
+<script src="{{url_for('static', filename='js/canvas/handler.js')}}"></script>
+</body>
+</html>

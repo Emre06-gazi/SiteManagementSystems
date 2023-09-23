@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="{{url_for('static', filename='css/main.css')}}" rel="stylesheet" />
+    <link href="{{url_for('static', filename='css/singleProfile.css')}}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+</head>
+
+<body id="profilePage">
+    <div class="container">
+        <h1>profil</h1>
+        <div class="content">
+            <div class="profile">
+            <div class="user">
+                <div class="profile-photo">
+                    <img id="output" src="https://xsgames.co/randomusers/assets/avatars/male/78.jpg">
+                </div>
+                <div class="upload">
+                    <div class="profile-photo-info">
+                        <h4>Profil Fotoğrafı</h4>
+                        <h6>Lütfen dosyanızın boyutunun 1MB'tan düşük ve yalnızca .jpg ve .png uzantısında olmasına
+                            dikkat
+                            ediniz.</h6>
+                    </div>
+                    <input class="upload-btn" type="file" name="avatar" accept="image/png, image/jpeg"
+                        onchange="loadFile(event)">
+                </div>
+                <button id="profile-edit-button" class="edit-btn">Düzenle<span
+                        class="material-icons">border_color</span></button>
+            </div>
+        </div>
+
+        <div class="personal">
+            <div class="section-title">
+                <h3>Kişisel Bilgilerim</h3>
+            </div>
+            <div class="left-personal">
+                <div class="changer">
+                    <h6>Ad</h6>
+                    <p>
+                        {% for user in users %}
+                        {{ user.firstname }}
+                        {% endfor %}
+                    </p>
+                    <h6>Kullanıcı Adı</h6>
+                    <p>
+                         {% for user in users %}
+                        {{ user.username }}
+                        {% endfor %}
+                    </p>
+                </div>
+                <div class="changer">
+                    <h6>Rütbe</h6>
+                    <label>{% for user in users %}
+                        {{ user.tagname }}
+                        {% endfor %}</label>
+                </div>
+            </div>
+            <div class="right-personal">
+                <div class="changer">
+                    <h6>Soyad</h6>
+                    <p>{% for user in users %}{{ user.lastname }}{% endfor %}</p>
+                </div>
+                <div class="changer">
+                    <h6>Yetkili Olunan Siteler</h6>
+                    <p>{% for user in users %}{{ user.sites }}{% endfor %}</p>
+                </div>
+                <div class="changer">
+                    <h6>Şifre</h6>
+                    <input type="password" id="passwordChange" value="{% for user in users%}{{ user.password}}{% endfor %}">
+                    <span class="material-icons" id="visible">visibility</span>
+                </div>
+            </div>
+            <button id="edit-button" class="edit-btn">Düzenle<span class="material-icons">border_color</span></button>
+        </div>
+        <div id="save">
+            <button class="save-btn btn" name="update" value="updateVal">Değişiklikleri Kaydet</button>
+            <button class="cancel-btn btn">İptal Et</button>
+        </div>
+            <form action="*" method="POST">
+                <input type="text" name="firstname" value="{% for user in users %}{{ user.firstname }}{% endfor %}">
+                <input type="text" name="lastname" value="{% for user in users %}{{ user.lastname }}{% endfor %}">
+                <input type="text" name="username" value="{% for user in users %}{{ user.username }}{% endfor %}">
+                <input type="text" name="tagname" value="{% for user in users %}{{ user.tagname }}{% endfor %}">
+                <input type="text" name="sites" value="{% for user in users %}{{ user.sites }}{% endfor %}">
+                <input type="text" name="level" value="{% for user in users %}{{ user.level }}{% endfor %}">
+
+
+
+                <!--hidden-->
+                <input type="hidden" name="idn" value="{% for user in users %}{{ user.id }}{% endfor %}">
+                <!--hidden-->
+
+                <button name="update" value="updateVal">Bilgilerimi Güncelle</button>
+
+                <input type="text" name="password" value="" placeholder="Sifre">
+
+                <button name="changePass" value="changePassword">Sifreyi Degistir.</button>
+
+            </form>
+
+    </div>
+        </div>
+    <script src="{{url_for('static', filename='js/singleProfile.js')}}"></script>
+</body>
+
+</html>

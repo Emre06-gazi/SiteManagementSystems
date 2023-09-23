@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/assets/css/main.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style>
+        body {
+            background-color: var(--thirdColor);
+        }
+
+        .container-content {
+            width: 95%;
+            height: calc(100vh - 12rem);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            margin-left: 2.5rem;
+            margin-top: 2rem;
+            background-color: var(--thirdColor);
+        }
+
+        .efendi-content {
+            width: 80vw;
+            margin-block: 2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 1.5rem;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.06);
+        }
+
+        label {
+            color: var(--secondaryColor);
+        }
+
+        .closePage {
+            transform: translate(-30rem, 0rem);
+            transition: .5s;
+            opacity: 0;
+        }
+
+        .geri {
+            height: 1.3rem;
+            width: 1rem;
+            background: url("../../icons/chevron-left-solid.svg") right;
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin-right: 1rem;
+            filter: var(--iconColor);
+
+        }
+
+        /* ----------------------------SENARYOLAR------------------------------- */
+        .kayitli {
+            width: 90%;
+            background-color: var(--background);
+            border-radius: 3rem;
+            padding: 1rem;
+            margin-block: 1rem;
+            cursor: pointer;
+            transition: .5s;
+        }
+
+        .kayitli:hover {
+            transition: .5s;
+            opacity: .6;
+        }
+
+        .kayitli span {
+            color: var(--fifthColor);
+            font-weight: 300;
+        }
+
+        .senaryo-saat {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-block: 1rem;
+            width: 80%;
+        }
+
+
+        /* ----------------------------SENARYO EKLE------------------------------- */
+
+        .senaryo-container {
+            width: 95%;
+            margin-top: 1rem;
+            margin-left: 2.5rem;
+            height: calc(100vh - 8rem);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .senaryolar {
+            color: var(--fourthColor);
+            height: calc(100vh - 1rem);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .senaryo-ekleme {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .senaryo-ekleme-div {
+            margin-bottom: 2rem;
+        }
+
+        .senaryo-content {
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .title {
+            display: flex;
+            align-items: center;
+            margin-left: -.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .gunler {
+            display: flex;
+            margin-top: 1rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+            border-radius: 3rem;
+        }
+
+        .gunler span {
+            height: 2.6rem;
+            width: 2.6rem;
+            padding: .1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--secondaryColor);
+            border-radius: 50%;
+            font-weight: 400;
+            transition: .5s;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .gunler span:hover {
+            color: #f3f3f3;
+            background: var(--blue);
+        }
+
+        .selected-gun {
+            background-color: #00ff8041;
+        }
+
+        .anaDiv {
+            border: 1px solid var(--hr);
+            border-radius: 1.5rem;
+            margin-block-end: 1rem;
+            padding-block: 1rem;
+            background: var(--background);
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            gap: 4rem;
+            color: var(--secondaryColor);
+            position: relative;
+            transition: .5s;
+        }
+
+        .anaDiv select {
+            width: 2.5rem;
+            height: 2rem;
+            font-size: 1.5rem;
+            color: var(--fourthColor);
+            background: transparent;
+            appearance: none;
+            border: none;
+        }
+
+        .ilkSenaryoDiv,
+        .ikiSenaryoDiv {
+            display: flex;
+            margin-left: 2rem;
+            flex-direction: column;
+            align-items: center;
+            font-weight: 100;
+        }
+
+        .baslangicDiv,
+        .bitisDiv {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ikiSenaryoDiv {
+            margin-right: 2rem;
+        }
+
+        .saat-ayarla-div {
+            margin-top: 1rem;
+        }
+
+        .saat-sil {
+            background: transparent;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .senaryolar input {
+            padding: 1rem;
+            width: 90%;
+            border: none;
+            border-radius: 2rem;
+            background: var(--background);
+            color: var(--fourthColor);
+        }
+
+        .senaryo-kaydet {
+            width: 50%;
+        }
+
+        .senaryo-isim-gir {
+            margin-block: 1rem;
+        }
+
+        /* ----------------------------BUTONLAR------------------------------- */
+
+        .btn {
+            color: var(--fourthColor);
+            height: 1.5rem;
+            width: 1.5rem;
+            border-radius: 50%;
+            font-size: .75rem;
+            font-weight: 700;
+            background: red;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: .5rem;
+            right: .5rem;
+            opacity: .6;
+            color: #f3f3f3;
+        }
+
+        .btn:hover {
+            opacity: 1;
+        }
+
+        .btn-submit,
+        .buton-normal {
+            width: 50%;
+            padding: 1rem;
+            background: var(--blue);
+            color: #fff;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 3rem;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .ekle-btn {
+            width: 100%;
+            padding: 0.5rem;
+            font-weight: 600;
+            border-radius: 1rem;
+            background: var(--blue);
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover,
+        .buton-normal:hover,
+        .ekle-btn:hover {
+            opacity: .8;
+        }
+
+        .geri{
+            filter: var(--iconColor);
+        }
+
+        /* ----------------------------GRUP EKLE------------------------------- */
+
+        .grupla-container {
+            color: var(--fourthColor);
+            height: calc(100vh - 8rem);
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-left: 2.5rem;
+            margin-top: 1rem;
+        }
+
+        .grupla-content {
+            width: 100%;
+        }
+
+        .inputs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .grup-checkbox-label.checked {
+            background: #00ff8041;
+        }
+
+        .grupla-content label {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            font-size: 1.5rem;
+            height: 2.5rem;
+            width: 4.5rem;
+            border-radius: 3rem;
+            background-color: var(--thirdColor);
+            color: var(--fourthColor);
+            transition: .5s;
+        }
+
+        .grupla-content label:hover {
+            color: #f3f3f3;
+            background: var(--blue);
+        }
+
+        .grupla-content label>input {
+            height: 2.5rem;
+            width: 4.5rem;
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .grupla-content input {
+            width: 92%;
+            padding: 1rem;
+            border: none;
+            border-radius: 2rem;
+            margin-block: 1rem;
+            color: var(--fourthColor);
+            background-color: var(--primaryColor);
+        }
+
+        /* -----------------------------------ANIMASYON------------------------------------ */
+        #secili-gunler,
+        #metin,
+        #selectedValues,
+        #myParagraph {
+            display: none;
+        }
+
+        #gruplaPage {
+            position: absolute;
+            top: -1rem;
+            left: -1rem;
+        }
+
+        #senaryoPage {
+            position: absolute;
+            top: -1rem;
+            left: -1.5rem;
+        }
+
+        #yonetimEmbed {
+            position: absolute;
+            top: -1rem;
+            left: -1rem;
+        }
+
+        .openAdd {
+            display: flex;
+            position: absolute;
+            transform: translate(0rem, 0rem);
+            transition: .5s;
+            opacity: 1;
+            z-index: 5555;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="full-content">
+        <div class="container">
+            <div id="yonetimEmbed">
+                <div class="container-content">
+                    <div>
+                        <h5>Kayıtlı Senaryolar</h5>
+                        <div class="efendi-content">
+                            {% for scenario_data in scenarios %}
+                                {% for scenario in scenario_data['scenarios'] %}
+                                    <div class="kayitli">
+                                        <span>{{ scenario[0] }}</span>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                            <button onclick="senaryoEkle()" class="ekle-btn">SENARYO EKLE</button>
+                        </div>
+                    </div>
+                    <div>
+                        <h5>Kayıtlı Gruplar</h5>
+
+                              <p>Group Name: </p>
+                              <p>Pins: </p>
+
+                        <div class="efendi-content">
+                            {% for group_data in groups %}
+                               {% for group in group_data['groups'] %}
+                                <div class="kayitli">
+                                  <span>{{ group['name'] }} --> Pinler= ({{ group['pins'] | join(', ') }})</span>
+                                </div>
+                               {% endfor %}
+                            {% endfor %}
+                            <button onclick="grupEkle()" class="ekle-btn">GRUP EKLE</button>
+                        </div>
+                    </div>
+                    <button class="btn-submit" onclick="submitForm()">BAŞLAT</button>
+                </div>
+            </div>
+            <div id="senaryoPage" class="senaryo-container closePage">
+                  <form>
+    <fieldset>
+     <legend>Haftanın Günleri</legend>
+      <label for="pazartasi">
+        <input type="checkbox" id="pazartasi" name="gunler[]" value="0"> Pazartesi
+      </label><br>
+      <label for="sali">
+        <input type="checkbox" id="sali" name="gunler[]" value="1"> Salı
+      </label><br>
+      <label for="carsamba">
+        <input type="checkbox" id="carsamba" name="gunler[]" value="2"> Çarşamba
+      </label><br>
+      <label for="persembe">
+        <input type="checkbox" id="persembe" name="gunler[]" value="3"> Perşembe
+      </label><br>
+      <label for="cuma">
+        <input type="checkbox" id="cuma" name="gunler[]" value="4"> Cuma
+      </label><br>
+      <label for="cumartesi">
+        <input type="checkbox" id="cumartesi" name="gunler[]" value="5"> Cumartesi
+      </label><br>
+      <label for="pazar">
+        <input type="checkbox" id="pazar" name="gunler[]" value="6"> Pazar
+      </label><br>
+    </fieldset>
+
+    <fieldset>
+        <legend>Saat Seçimi</legend>
+        <label for="baslangic-saati">Başlangıç Saati:</label>
+        <input type="time" id="baslangic-saati" name="baslangic-saati" step="300"><br>
+        <label for="bitis-saati">Bitiş Saati:</label>
+        <input type="time" id="bitis-saati" name="bitis-saati"step="300"><br>
+
+          <div id="saatler"></div>
+
+      <button type="button" onclick="saatEkle()">Saat Ekle</button>
+    </fieldset>
+    <fieldset>
+        <legend>Kayitli Gruplar</legend>
+            {% for group_data in groups %}
+            {% for group in group_data['groups'] %}
+                <label>
+                    <input type="radio" name="selected-group" value="{{ group['name'] }}"> {{ group['name'] }} ({{ group['pins'] | join(', ') }})
+                </label><br>
+            {% endfor %}
+            {% endfor %}
+    </fieldset>
+
+
+    <input type="submit" value="Gönder">
+  </form>
+                --------
+                <div class="senaryolar">
+                    <div class="senaryo-ekleme-div">
+                        <div class="title">
+                            <span class="geri" onclick="goBack()"></span>
+                            <h5>Senaryo Ayarla</h5>
+                        </div>
+                        <div class="senaryo-ekleme">
+                            <div class="senaryo-content">
+                                <h5>Günler</h5>
+                                <div class="gunler" id="haftanin-gunleri">
+                                    <span>Pzt</span>
+                                    <span>Sal</span>
+                                    <span>Çrş</span>
+                                    <span>Prş</span>
+                                    <span>Cum</span>
+                                    <span>Cmt</span>
+                                    <span>Pzr</span>
+                                </div>
+                                <p id="secili-gunler"></p>
+                            </div>
+                            <div class="senaryo-content">
+                                <h5>Saatler</h5>
+                                <div class="saat-ayarla-div">
+                                    <div id="saat-ayarla"></div>
+                                </div>
+                                <div class="tek-saat-ayarla-div">
+                                    <div id="tek-saat-dropdown">
+                                    </div>
+                                    <div id="saat-alanlari">
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="saat-ekle-button buton-normal ekle-btn">Saat Ekle</button>
+                        </div>
+                    </div>
+                    <h2>Kayıtlı Gruplar</h2>
+                        <div class="kayitli" onclick="seciliGrupDegistir('1,4,5,6')"> <!-- Grup 1 -->
+                            <span>1,4,5,6</span>
+                        </div>
+                        <div class="kayitli" onclick="seciliGrupDegistir('2,3,7,8')"> <!-- Grup 2 -->
+                            <span>2,3,7,8</span>
+                        </div>
+                    <div class="efendi-content">
+                        <div class="senaryo-content">
+                            <div class="senaryo-isim">
+                                <h5 class="senaryo-isimlendirme-baslik">Senaryo Adlandır </h5>
+                            </div>
+                            <div class="senaryo-isim-gir">
+                                <p id="metin"></p>
+                                <input type="text" name="senaryoIsimlendirme" id="inputAlanı"
+                                    placeholder="Senaryo İsmi Oluşturun" oninput="guncelle()">
+                            </div>
+                            <div class="kaydet-butonu">
+                                <button class="senaryo-kaydet buton-normal ekle-btn">Senaryoyu
+                                    Kaydet</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="gruplaPage" class="closePage">
+                <div class="grupla-container">
+                    <div>
+                        <div class="title">
+                            <span class="geri" onclick="goBack()"></span>
+                            <h5>Mevcut Vanalar</h5>
+                        </div>
+                        <div class="grupla-content">
+                            <div class="efendi-content">
+                                <h5>Vana Seç</h5>
+                                <div class="inputs">
+                                    <div>
+                                        <label class="grup-checkbox-label" for="checkbox1"><input type="checkbox"
+                                                class="grup-checkbox" id="checkbox1" value="1"
+                                                onclick="updateSelectedValues()">1</label>
+                                    </div>
+                                    <div>
+                                        <label class="grup-checkbox-label" for="checkbox2"><input type="checkbox"
+                                                class="grup-checkbox" id="checkbox2" value="3"
+                                                onclick="updateSelectedValues()">3</label>
+                                    </div>
+                                    <div>
+                                        <label class="grup-checkbox-label" for="checkbox3"><input type="checkbox"
+                                                class="grup-checkbox" id="checkbox3" value="5"
+                                                onclick="updateSelectedValues()">5</label>
+                                    </div>
+                                    <div>
+                                        <label class="grup-checkbox-label" for="checkbox4"><input type="checkbox"
+                                                class="grup-checkbox" id="checkbox4" value="7"
+                                                onclick="updateSelectedValues()">7</label>
+                                    </div>
+                                    <div>
+                                        <label class="grup-checkbox-label" for="checkbox5"><input type="checkbox"
+                                                class="grup-checkbox" id="checkbox5" value="9"
+                                                onclick="updateSelectedValues()">9</label>
+                                    </div>
+                                    <div>
+                                        <label class="grup-checkbox-label" for="checkbox6"><input type="checkbox"
+                                                class="grup-checkbox" id="checkbox6" value="11"
+                                                onclick="updateSelectedValues()">11</label>
+                                    </div>
+                                    <div>
+                                        <label class="grup-checkbox-label" for="checkbox7"><input type="checkbox"
+                                                class="grup-checkbox" id="checkbox7" value="13"
+                                                onclick="updateSelectedValues()">13</label>
+                                    </div>
+                                    <div>
+                                        <label class="grup-checkbox-label" for="checkbox8"><input type="checkbox"
+                                                class="grup-checkbox" id="checkbox8" value="15"
+                                                onclick="updateSelectedValues()">15</label>
+                                    </div>
+                                    <div>
+                                        <label class="grup-checkbox-label" for="checkbox9"><input type="checkbox"
+                                                class="grup-checkbox" id="checkbox9" value="17"
+                                                onclick="updateSelectedValues()">17</label>
+                                    </div>
+                                    <div>
+                                        <label class="grup-checkbox-label" for="checkbox10"><input type="checkbox"
+                                                class="grup-checkbox" id="checkbox10" value="19"
+                                                onclick="updateSelectedValues()">19</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <p id="selectedValues"></p>
+                        </div>
+                    </div>
+                    <div class="efendi-content">
+                        <div class="grupla-content">
+                            <div class="grup-adi-flex">
+                                <h5>Grup Adlandır</h5>
+                            </div>
+                            <input type="text" id="myInput" oninput="updateParagraph()"
+                                placeholder="Grup Adi Oluşturun">
+                            <div class="grup-kaydet-butonu">
+                                <button class="grup-kaydet buton-normal" onclick="logInput()">Grubu Kaydet</button>
+                            </div>
+                            <p id="myParagraph"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+      function saatEkle() {
+      var saatlerDiv = document.getElementById("saatler");
+
+      var saatGrubuDiv = document.createElement("div");
+
+      var baslangicLabel = document.createElement("label");
+      baslangicLabel.innerHTML = "Başlangıç Saati:";
+
+      var baslangicInput = document.createElement("input");
+      baslangicInput.type = "time";
+      baslangicInput.name = "baslangic-saati";
+      baslangicInput.step = "300";
+
+      var bitisLabel = document.createElement("label");
+      bitisLabel.innerHTML = "Bitiş Saati:";
+
+      var bitisInput = document.createElement("input");
+      bitisInput.type = "time";
+      bitisInput.name = "bitis-saati";
+      bitisInput.step = "300";
+
+      var kaldirButton = document.createElement("button");
+      kaldirButton.innerHTML = "x";
+      kaldirButton.type = "button";
+      kaldirButton.onclick = function() {
+        saatlerDiv.removeChild(saatGrubuDiv);
+      };
+
+      saatGrubuDiv.appendChild(baslangicLabel);
+      saatGrubuDiv.appendChild(baslangicInput);
+      saatGrubuDiv.appendChild(document.createElement("br"));
+      saatGrubuDiv.appendChild(bitisLabel);
+      saatGrubuDiv.appendChild(bitisInput);
+      saatGrubuDiv.appendChild(document.createElement("br"));
+      saatGrubuDiv.appendChild(kaldirButton);
+
+      saatlerDiv.appendChild(saatGrubuDiv);
+      }
+    </script>
+    <script>
+        window.onload = function saatOlustur() {
+            // Başlangıç saatleri için bir select elementi oluşturma
+            var anaDiv = document.createElement("div");
+            anaDiv.classList.add("anaDiv");
+            var baslangicSaatleri = document.createElement("select");
+            baslangicSaatleri.id = "tek-baslangic-saati";
+            var ilkSenaryoDiv = document.createElement("div");
+            ilkSenaryoDiv.classList.add("ilkSenaryoDiv");
+            var ikiSenaryoDiv = document.createElement("div");
+            ikiSenaryoDiv.classList.add("ikiSenaryoDiv");
+            var baslangicDiv = document.createElement("div");
+            baslangicDiv.classList.add("baslangicDiv");
+            var bitisDiv = document.createElement("div");
+            bitisDiv.classList.add("bitisDiv");
+
+            for (var i = 0; i <= 23; i++) {
+                var option = document.createElement("option");
+                option.value = i;
+                option.text = i < 10 ? "0" + i : i;
+                baslangicSaatleri.appendChild(option);
+            }
+
+            // Başlangıç dakikaları için bir select elementi oluşturma
+            var baslangicDakikalari = document.createElement("select");
+            baslangicDakikalari.id = "tek-baslangic-dakikasi";
+
+            for (var i = 0; i <= 55; i += 5) {
+                var option = document.createElement("option");
+                option.value = i;
+                option.text = i < 10 ? "0" + i : i;
+                baslangicDakikalari.appendChild(option);
+            }
+
+            // Bitiş saatleri için bir select elementi oluşturma
+            var bitisSaatleri = document.createElement("select");
+            bitisSaatleri.id = "tek-bitis-saati";
+
+            for (var i = 0; i <= 23; i++) {
+                var option = document.createElement("option");
+                option.value = i;
+                option.text = i < 10 ? "0" + i : i;
+                bitisSaatleri.appendChild(option);
+            }
+
+            // Bitiş dakikaları için bir select elementi oluşturma
+            var bitisDakikalari = document.createElement("select");
+            bitisDakikalari.id = "tek-bitis-dakikasi";
+
+            for (var i = 0; i <= 55; i += 5) {
+                var option = document.createElement("option");
+                option.value = i;
+                option.text = i < 10 ? "0" + i : i;
+                bitisDakikalari.appendChild(option);
+            }
+
+            // Dropdownları içeren div elementini bulma ve içine eklemeleri yapma
+            var dropdownDiv = document.getElementById("tek-saat-dropdown");
+            dropdownDiv.appendChild(anaDiv);
+            anaDiv.appendChild(ilkSenaryoDiv);
+            ilkSenaryoDiv.appendChild(document.createTextNode("Başlangıç"));
+            ilkSenaryoDiv.appendChild(baslangicDiv);
+            baslangicDiv.appendChild(baslangicSaatleri);
+            baslangicDiv.appendChild(baslangicDakikalari);
+            anaDiv.appendChild(ikiSenaryoDiv);
+            ikiSenaryoDiv.appendChild(document.createTextNode(" Bitiş"));
+            ikiSenaryoDiv.appendChild(bitisDiv);
+            bitisDiv.appendChild(bitisSaatleri);
+            bitisDiv.appendChild(bitisDakikalari);
+        };
+
+        // Saat ekleme butonunu seçme
+        var saatEkleButton = document.querySelector(".saat-ekle-button");
+
+        // Saat ekleme butonuna tıklama olayını dinleme
+        saatEkleButton.addEventListener("click", function () {
+            // Yeni bir div elementi oluşturma
+            var yeniSaatDiv = document.createElement("div");
+            yeniSaatDiv.classList.add("anaDiv");
+            var ilkSenaryoEkleDiv = document.createElement("div");
+            ilkSenaryoEkleDiv.classList.add("ilkSenaryoDiv");
+            var ikiSenaryoEkleDiv = document.createElement("div");
+            ikiSenaryoEkleDiv.classList.add("ikiSenaryoDiv");
+            var baslangicEkleDiv = document.createElement("div");
+            baslangicEkleDiv.classList.add("baslangicDiv");
+            var bitisEkleDiv = document.createElement("div");
+            bitisEkleDiv.classList.add("bitisDiv");
+
+            // Başlangıç saatleri için bir select elementi oluşturma
+            var baslangicSaatleri = document.createElement("select");
+            baslangicSaatleri.id = "tek-baslangic-saati";
+
+            for (var i = 0; i <= 23; i++) {
+                var option = document.createElement("option");
+                option.value = i;
+                option.text = i < 10 ? "0" + i : i;
+                baslangicSaatleri.appendChild(option);
+            }
+
+            // Başlangıç dakikaları için bir select elementi oluşturma
+            var baslangicDakikalari = document.createElement("select");
+            baslangicDakikalari.id = "tek-baslangic-dakikasi";
+
+            for (var i = 0; i <= 55; i += 5) {
+                var option = document.createElement("option");
+                option.value = i;
+                option.text = i < 10 ? "0" + i : i;
+                baslangicDakikalari.appendChild(option);
+            }
+
+            // Bitiş saatleri için bir select elementi oluşturma
+            var bitisSaatleri = document.createElement("select");
+            bitisSaatleri.id = "tek-bitis-saati";
+
+            for (var i = 0; i <= 23; i++) {
+                var option = document.createElement("option");
+                option.value = i;
+                option.text = i < 10 ? "0" + i : i;
+                bitisSaatleri.appendChild(option);
+            }
+
+            // Bitiş dakikaları için bir select elementi oluşturma
+            var bitisDakikalari = document.createElement("select");
+            bitisDakikalari.id = "tek-bitis-dakikasi";
+
+            for (var i = 0; i <= 55; i += 5) {
+                var option = document.createElement("option");
+                option.value = i;
+                option.text = i < 10 ? "0" + i : i;
+                bitisDakikalari.appendChild(option);
+            }
+
+            // Dropdownları içeren div elementini oluşturma
+            yeniSaatDiv.appendChild(ilkSenaryoEkleDiv);
+            ilkSenaryoEkleDiv.appendChild(document.createTextNode("Başlangıç"));
+            ilkSenaryoEkleDiv.appendChild(baslangicEkleDiv)
+            baslangicEkleDiv.appendChild(baslangicSaatleri);
+            baslangicEkleDiv.appendChild(baslangicDakikalari);
+            yeniSaatDiv.appendChild(ikiSenaryoEkleDiv);
+            ikiSenaryoEkleDiv.appendChild(document.createTextNode(" Bitiş"));
+            ikiSenaryoEkleDiv.appendChild(bitisEkleDiv);
+            bitisEkleDiv.appendChild(bitisSaatleri);
+            bitisEkleDiv.appendChild(bitisDakikalari);
+
+            // Çarpı butonu oluşturma
+            var carpiButton = document.createElement("button");
+            carpiButton.innerHTML = "X";
+            carpiButton.classList.add("btn");
+            carpiButton.classList.add("saat-sil");
+            // Çarpı butonuna tıklama olayını dinleme
+            carpiButton.addEventListener("click", function () {
+                // Saat alanını içeren divi kaldırma
+                yeniSaatDiv.remove();
+            });
+
+            // Çarpı butonunu yeni saat divine ekleme
+            yeniSaatDiv.appendChild(carpiButton);
+
+            // Saat alanlarını içeren divi bulma ve yeni saat divini eklemek
+            var saatAlanlariDiv = document.getElementById("tek-saat-dropdown");
+            saatAlanlariDiv.appendChild(yeniSaatDiv);
+        });
+
+        const haftaninGunleriSelected = document.querySelectorAll('#haftanin-gunleri span');
+        let selectedDays = [];
+
+        const saatAyarlamalari = {}; // Saat ayarlamalarını tutacak obje
+
+        haftaninGunleriSelected.forEach(span => {
+            span.addEventListener('click', () => {
+                span.classList.toggle('selected-gun');
+
+                const gun = span.textContent;
+                if (span.classList.contains('selected-gun')) {
+                    selectedDays.push(gun);
+                    if (!saatAyarlamalari[gun]) {
+                        saatAyarlamalari[gun] = {
+                            baslangicSaat: null,
+                            baslangicDakika: null,
+                            bitisSaat: null,
+                            bitisDakika: null
+                        };
+                    }
+                } else {
+                    const seciliGunler = document.getElementById('secili-gunler');
+                    seciliGunler.textContent = selectedDays.join(', ');
+                    const index = selectedDays.indexOf(gun);
+                    selectedDays.splice(index, 1);
+                    delete saatAyarlamalari[gun];
+                }
+                selectedDays.sort((a, b) => {
+                    const days = ['Pzt', 'Sal', 'Çrş', 'Prş', 'Cum', 'Cmt', 'Pzr'];
+                    return days.indexOf(a) - days.indexOf(b);
+                });
+                const seciliGunler = document.getElementById('secili-gunler');
+                seciliGunler.textContent = selectedDays.join(', ');
+            });
+
+        });
+
+        var inputAlanı = document.querySelector('input[name="senaryoIsimlendirme"]');
+
+        var seciliGrup;
+
+        function seciliGrupDegistir(deger) {
+            seciliGrup = deger;
+        }
+
+        // HTML düğmesini seçiyoruz
+        var kaydetDugmesi = document.querySelector('.senaryo-kaydet');
+
+        kaydetDugmesi.addEventListener('click', function () {
+            var secilenGunler = document.getElementsByClassName("selected-gun");
+            // senaryo ismini alma.
+            var senaryoIsmi = inputAlanı.value;
+
+            // secili günleri alıp indexe çevirme.
+            var seciliGunlerKaydetme = document.getElementById('secili-gunler');
+
+            // innerHTML özelliğini kullanarak içeriği alıyoruz
+            var icerik = seciliGunlerKaydetme.innerHTML;
+
+            // Uyarı mesajlarını kontrol etme
+            if (senaryoIsmi === "" && secilenGunler.length === 0) {
+                alert("Lütfen Senaryo İsmi ayarlayın ve gün seçiniz.");
+            } else if (senaryoIsmi === "") {
+                alert("Senaryo İsmi Boş Olamaz");
+            } else if (secilenGunler.length === 0) {
+                alert("Lütfen gün seçiniz.");
+            } else if (seciliGrup === undefined) {
+                alert("Lütfen grup seçiniz.");
+            } else {
+
+                var tekSaatAyarlaDiv = document.getElementById("tek-saat-dropdown");
+                var selectElements = tekSaatAyarlaDiv.getElementsByTagName("select");
+
+                var tekSelectedOptions = [];
+                for (var i = 0; i < selectElements.length; i++) {
+                    var select = selectElements[i];
+                    var tekSelectedValue = select.value;
+                    tekSelectedOptions.push(tekSelectedValue);
+                }
+                // Başlangıç saatleri ve bitiş saatleri listesini oluştur
+                var saatler = [];
+                for (var j = 0; j < tekSelectedOptions.length; j += 2) {
+                    var baslangicSaat = parseInt(tekSelectedOptions[j]);
+                    var baslangicDakika = parseInt(tekSelectedOptions[j + 1]);
+                    var bitisSaat = parseInt(tekSelectedOptions[j + 2]);
+                    var bitisDakika = parseInt(tekSelectedOptions[j + 3]);
+
+                    // Başlangıç saatinden sonra bitiş saati gelirse uyarı mesajını göster
+                    if (baslangicSaat > bitisSaat || (baslangicSaat === bitisSaat && baslangicDakika >= bitisDakika)) {
+                        alert("Başlangıç saatleri bitiş saatinden sonra olamaz...");
+                        console.log("Başlangıç saatleri bitiş saatinden sonra olamaz...")
+                        return; // Fonksiyondan çık
+                    }
+
+                    saatler.push([baslangicSaat, baslangicDakika, bitisSaat, bitisDakika]);
+                }
+
+                var saatlerDizi = [];
+
+                for (var j = 0; j < tekSelectedOptions.length; j += 2) {
+                    saatlerDizi.push([parseInt(tekSelectedOptions[j]), parseInt(tekSelectedOptions[j + 1])]);
+                }
+
+                var grupluSaatlerDizi = [];
+                var i = 0;
+                while (i < saatlerDizi.length) {
+                    if (i + 1 < saatlerDizi.length) {
+                        grupluSaatlerDizi.push([saatlerDizi[i], saatlerDizi[i + 1]]);
+                    } else {
+                        grupluSaatlerDizi.push([saatlerDizi[i]]);
+                    }
+
+                    i += 2;
+                }
+
+                var grupluSaatlerDiziString = JSON.stringify(grupluSaatlerDizi);
+
+                // Günleri virgül ile ayırarak dizi haline getir
+                var gunler = icerik.split(", ");
+
+                // Haftanın günlerini temsil eden bir nesne oluştur
+                var haftaGunleri = {
+                    "Pzt": 0,
+                    "Sal": 1,
+                    "Çrş": 2,
+                    "Prş": 3,
+                    "Cum": 4,
+                    "Cmt": 5,
+                    "Pzr": 6
+                };
+
+                // Günleri sıralı bir şekilde indexlere dönüştür
+                var indexler = gunler.map(function (gunIndex) {
+                    return haftaGunleri[gunIndex];
+                });
+                var listeGunler = Object.values(indexler);
+
+                var input = document.getElementById("inputAlanı").value;
+                var isimIngilizce = turkceHarfleriCevir(input);
+                document.getElementById("metin").innerText = isimIngilizce;
+
+                 var birlesikCikti = "[" + JSON.stringify(isimIngilizce) + "," +
+                 JSON.stringify(listeGunler.concat([4])) + "," +
+                 JSON.stringify(grupluSaatlerDizi) + "," + "[" + seciliGrup + "]" + "]";
+
+                var tamCikti = "[" + birlesikCikti + "]";
+
+                console.log("Senaryo İsmi: " + isimIngilizce);
+                console.log("Günler ve Saatler: " + tamCikti);
+
+                goBack();
+            }
+        });
+        function guncelle() {
+            var input = document.getElementById("inputAlanı").value;
+            var cevrilmisMetin = turkceHarfleriCevir(input);
+            document.getElementById("metin").innerText = cevrilmisMetin;
+        }
+        function turkceHarfleriCevir(metin) {
+            metin = metin.replace(/Ş/g, "S");
+            metin = metin.replace(/ş/g, "s");
+            metin = metin.replace(/İ/g, "I");
+            metin = metin.replace(/ı/g, "i");
+            metin = metin.replace(/Ğ/g, "G");
+            metin = metin.replace(/ğ/g, "g");
+            metin = metin.replace(/Ü/g, "U");
+            metin = metin.replace(/ü/g, "u");
+            metin = metin.replace(/Ö/g, "O");
+            metin = metin.replace(/ö/g, "o");
+            metin = metin.replace(/Ç/g, "C");
+            metin = metin.replace(/ç/g, "c");
+            return metin;
+        }
+
+        //GRUPLAMA ===========
+
+        var selectedValues = [];
+
+        function updateSelectedValues() {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            var labels = document.querySelectorAll('.grup-checkbox-label');
+            var newSelectedValues = [];
+
+            labels.forEach(function (label) {
+                var checkbox = label.querySelector('input.grup-checkbox');
+                if (checkbox.checked) {
+                    label.classList.add('checked');
+                    newSelectedValues.push(checkbox.value);
+                } else {
+                    label.classList.remove('checked');
+                }
+            });
+
+            checkboxes.forEach(function (checkbox) {
+                if (checkbox.checked && !newSelectedValues.includes(checkbox.value)) {
+                    newSelectedValues.push(checkbox.value);
+                } else if (!checkbox.checked && newSelectedValues.includes(checkbox.value)) {
+                    var index = newSelectedValues.indexOf(checkbox.value);
+                    newSelectedValues.splice(index, 1);
+                }
+            });
+
+            selectedValues = newSelectedValues;
+            document.getElementById("selectedValues").textContent = selectedValues.join(", ");
+        }
+
+        var metin1; // Küresel değişken olarak tanımlanıyor
+
+        function updateParagraph() {
+            var inputText = document.getElementById("myInput").value;
+            metin1 = inputText.replace(/Ş/g, "S")
+                .replace(/ş/g, "s")
+                .replace(/İ/g, "I")
+                .replace(/ı/g, "i")
+                .replace(/Ğ/g, "G")
+                .replace(/ğ/g, "g")
+                .replace(/Ü/g, "U")
+                .replace(/ü/g, "u")
+                .replace(/Ö/g, "O")
+                .replace(/ö/g, "o")
+                .replace(/Ç/g, "C")
+                .replace(/ç/g, "c");
+
+            document.getElementById("myParagraph").textContent = metin1;
+        }
+
+        function logInput() {
+            var selectedValuesArray = selectedValues.map(Number);
+
+            var birlesikVeri = [metin1, selectedValuesArray];
+            var birlesikVeriString = JSON.stringify(birlesikVeri);
+
+            console.log("Gruplar: " + birlesikVeriString);
+            goBack();
+        }
+
+
+        // EKLEME BUTONLARI ============================
+
+        let mainPage = document.getElementById("yonetimEmbed");
+        let senaryoPage = document.getElementById("senaryoPage");
+        let grupPage = document.getElementById("gruplaPage");
+
+        function senaryoEkle() {
+            mainPage.classList.add("closePage");
+            mainPage.classList.remove("openAdd");
+            grupPage.classList.add("closePage");
+            grupPage.classList.remove("openAdd");
+            senaryoPage.classList.remove("closePage");
+            senaryoPage.classList.add("openAdd");
+        }
+
+        function grupEkle() {
+            mainPage.classList.add("closePage");
+            mainPage.classList.remove("openAdd");
+            senaryoPage.classList.add("closePage");
+            senaryoPage.classList.remove("openAdd");
+            grupPage.classList.remove("closePage");
+            grupPage.classList.add("openAdd");
+        }
+
+        function goBack() {
+            alert("başarıyla kaydedildi");
+            mainPage.classList.remove("closePage");
+            mainPage.classList.add("openAdd");
+            senaryoPage.classList.add("closePage");
+            senaryoPage.classList.remove("openAdd");
+            grupPage.classList.add("closePage");
+            grupPage.classList.remove("openAdd");
+        }
+        function goBackNormal() {
+            mainPage.classList.remove("closePage");
+            mainPage.classList.add("openAdd");
+            senaryoPage.classList.add("closePage");
+            senaryoPage.classList.remove("openAdd");
+            grupPage.classList.add("closePage");
+            grupPage.classList.remove("openAdd");
+        }
+
+        function loadDarkModeFromLocalStorage() {
+            const storedDarkMode = localStorage.getItem('darkMode');
+
+            if (storedDarkMode && storedDarkMode === 'true') {
+                document.body.classList.add("dark-theme");
+            } else {
+                document.body.classList.remove("dark-theme");
+            }
+        }
+        window.addEventListener('load', loadDarkModeFromLocalStorage);
+
+    </script>
+
+</body>
+
+</html>

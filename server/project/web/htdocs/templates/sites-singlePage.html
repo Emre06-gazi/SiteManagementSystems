@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <link href="{{url_for('static', filename='css/main.css')}}" rel="stylesheet" />
+    <link href="{{url_for('static', filename='css/sites-singlePage.css')}}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+</head>
+
+<body>
+<!--<button onclick="history.back()">Go Back</button>-->
+<!--{% set site = sites[0] %}-->
+<!--{{sites}}-->
+    <div class="sp-container">
+        <h1 class="title">site yönetimi</h1>
+        <p>{{sites}}</p>
+        <div class="sp-content">
+            <div class="sp-content-left">
+                <div class="site-profile-content">
+                    <span class="gradient-1"></span>
+                    <span class="gradient-2"></span>
+                    <span class="gradient-3"></span>
+                    <h1 class="site-adi">{{ site["site_name"] }}</h1>
+                </div>
+                <div class="yonetici-profile-content">
+                    <img src="https://xsgames.co/randomusers/assets/avatars/male/6.jpg" alt="">
+                    <div class="yonetici-infos">
+                        <h4>X Kisileri</h4>
+                        <p>Bu sitenin yoneticileri</p>
+                    </div>
+                    <span class="material-icons more-info">chevron_right</span>
+                </div>
+            </div>
+            <div class="sp-content-middle">
+                <h1>Bölgeler</h1>
+                <button>Yeni Bölge Ekle</button>
+                <div class="bolgeler">
+
+                    {% for area in site["areas"] %}
+                        <div class="bolge-adi">
+                        <h5>{{ area["name"] }}</h5>
+                            <span class="material-icons edit">edit</span>
+                        </div>
+                    {% endfor %}
+
+                    ================
+
+                    <form action="*">
+                        <h6>Site Ismi</h6>
+                        <input type="text" name="action" id="siteName" value="{{ site["site_name"] }}"><br>
+                        <h6>Bölgeler</h6><br>
+                        {% for area in site["areas"] %}
+                        -----Bölge Başlangıç----- <br>
+                            <label>Bölge Ismı</label>
+                            <input action="action" id="areas" value="{{ area["name"] }}"></input><br>
+                            <h6>Sistemler</h6><br>
+                            <label>Sistemler</label>
+                            <input type="text" value="{{ area["systems"]}}"><br>
+                        -----Bölge Sonu------<br><br><br>
+                        {% endfor %}
+                        <button action></button>
+                    </form>
+
+                </div>
+            </div>
+            <div class="sp-content-right">
+                <h1>Senaryolar</h1>
+
+                <div class="senaryolar">
+
+                {% for site in sites %}
+                    {% for area in site["areas"] %}
+                        <div class="bolge-adi">
+                            <h5>{{ area["name"] }}</h5>
+                            <span class="material-icons edit">edit</span>
+                        </div>
+
+                    <div class="sistemler">
+                    {% for system in area["systems"] %}
+                        {% if system == 1 %}
+                            <div class="senaryo-adi">
+                                <div class="senaryo">
+                                    <img src="{{url_for('static', filename='icons/droplet-solid.svg')}}" class="water">
+
+                                     <h5>Sulama</h5>
+                                </div>
+
+                                <span class="material-icons go">chevron_right</span>
+                            </div>
+
+                        {% elif system == 2 %}
+                            <div class="senaryo-adi">
+                                <div class="senaryo">
+                                    <img src="{{url_for('static', filename='icons/lightbulb-regular.svg')}}" class="lightning">
+
+                                    <h5>Işıklandırma</h5>
+                                </div>
+
+                                <span class="material-icons go">chevron_right</span>
+                            </div>
+
+                        {% elif system == 3 %}
+                            <div class="senaryo-adi">
+                                <div class="senaryo">
+                                    <img src="{{url_for('static', filename='icons/bolt-solid.svg')}}" class="energy">
+
+                                    <h5>Elektrik</h5>
+                                </div>
+
+                                <span class="material-icons go">chevron_right</span>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+                    {% endfor %}
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="{{url_for('static', filename='js/sites-singlePage.js')}}"></script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+.u-container {
+    height: 100vh;
+    width: 97.5vw;
+    display: flex;
+    flex-wrap: nowrap;
+    margin-left: 2rem;
+    gap: 1.5rem;
+    font-size: 1.5rem;
+    color: var(--fourthColor);
+}
+
+.user-container {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-radius: 1rem;
+}
+
+.profile-img {
+    width: 1rem;
+    margin-right: 1rem;
+}
+
+table {
+    width: 97%;
+    font-size: 1.5rem;
+    overflow: hidden;
+    border-radius: 2rem;
+    border: 1px solid var(--hr);
+}
+
+table tr {
+    background-color: transparent;
+    transition: .2s;
+}
+
+th {
+    color: var(--fourthColor);
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: left;
+    padding-left: 1rem;
+    padding-block: 1rem;
+    border: none;
+    transition: .5s;
+    border-bottom: 1px solid var(--hr);
+}
+
+td:last-child {
+    text-align: right;
+}
+
+td {
+    background-color: transparent;
+    margin-left: 1rem;
+    font-weight: bold;
+    padding: .5rem;
+    padding-left: 1rem;
+    cursor: pointer;
+}
+
+img {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 1rem;
+    object-fit: cover;
+}
+
+h4 {
+    font-size: 1.2rem;
+    padding: 0;
+    margin: .2rem;
+    color: var(--fourthColor);
+}
+
+p {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--fifthColor);
+}
+
+.name {
+    font-size: 1.1rem;
+    color: #3a86ff;
+}
+
+.edit,
+.delete,
+.profile {
+    opacity: .5;
+    font-size: 2rem !important;
+    transition: .5s;
+}
+
+.edit,
+.profile {
+    color: var(--fifthColor);
+}
+
+.delete {
+    color: red;
+}
+
+.edit:hover,
+.delete:hover,
+.profile:hover {
+    opacity: 1;
+}
+
+.panel {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    width: 30rem;
+    top: 50%;
+    left: 50%;
+    border: 1px solid var(--hr);
+    background-color: var(--thirdColor);
+    border-radius: 2rem;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
+
+#deleteTab {
+    display: none;
+}
+
+.top-level{
+    border-style: solid;
+    border-width: 2px;
+    border-color: red;
+    border-radius: 0.2rem;

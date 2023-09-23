@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/project/modules/broker" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/project/modules/database" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/project/modules/flask" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/project/modules/system" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/project/web" vcs="Git" />
+  </component>
+</project>

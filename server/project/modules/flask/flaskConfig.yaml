@@ -1,0 +1,35 @@
+app:
+    init:
+        static_folder: 'project/web/htdocs/assets'  # static
+        static_url_path: '/assets' # None
+        template_folder: 'project/web/htdocs/templates' # templates
+        instance_path: null
+        instance_relative_config: false
+    config:
+        DEBUG: null
+        TESTING: false
+        PROPAGATE_EXCEPTIONS: null
+        SECRET_KEY: 'RandomBiseyler'
+        PERMANENT_SESSION_LIFETIME: 2678400
+        USE_X_SENDFILE: false
+        SERVER_NAME: null
+        APPLICATION_ROOT: '/'
+        SESSION_COOKIE_NAME: 'session'
+        SESSION_COOKIE_DOMAIN: null
+        SESSION_COOKIE_PATH: null
+        SESSION_COOKIE_HTTPONLY: True
+        SESSION_COOKIE_SECURE: false
+        SESSION_COOKIE_SAMESITE: null
+        SESSION_REFRESH_EACH_REQUEST: True
+        MAX_CONTENT_LENGTH: null
+        SEND_FILE_MAX_AGE_DEFAULT: null
+        TRAP_BAD_REQUEST_ERRORS: null
+        TRAP_HTTP_EXCEPTIONS: false
+        EXPLAIN_TEMPLATE_LOADING: false
+        PREFERRED_URL_SCHEME: 'http'
+        TEMPLATES_AUTO_RELOAD: null
+        MAX_COOKIE_SIZE: 4093
+    port: 80
+    run:
+        debug: false
+        use_reloader: false

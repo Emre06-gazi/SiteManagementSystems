@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block pageTitle %}Deneme İndex{% endblock %}
+
+{% block headerCss %}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+<link href="{{url_for('static', filename='css/index.css')}}" rel="stylesheet" />
+<link href="{{url_for('static', filename='icons/folder-icon.png')}}" rel="stylesheet" />
+<link href="{{url_for('static', filename='icons/folder-icon-white.png')}}" rel="stylesheet" />
+
+{% endblock %}
+
+{% block headerJs %}
+{{ super() }}
+<script src="{{url_for('static', filename='js/index_head.js')}}"></script>
+{% endblock %}
+
+
+{% block mainContent %}
+<script>
+  loadDarkModeFromLocalStorage();
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+<div class="sidebar" id="sideBar">
+  <div class="mainTitle ">
+    <h1 id="sidebarTitle">logo</h1>
+    <div class="icons">
+      <span class="material-icons" id="menuicon">close</span>
+    </div>
+  </div>
+  <div class="contentSites" id="sidebarContent">
+    <ul class="contentList">
+      <li>
+        <details class="contentListItem">
+          <summary>
+            <div class="contentTitle">
+              <span class="material-icons">home</span>
+              <p>Siteler</p>
+            </div>
+          </summary>
+          <ul id="tree" class="tree">
+          </ul>
+        </details>
+      </li>
+      <li class="contentListItem">
+        <details>
+          <summary id="siteEkle">
+            <div class="contentTitle">
+              <span class="material-icons">add</span>
+              <p>Site Ekle / Düzenle</p>
+            </div>
+          </summary>
+        </details>
+      </li>
+      <li class="contentListItem">
+        <details>
+          <summary id="profile">
+            <div class="contentTitle">
+              <span class="material-icons">manage_accounts</span>
+              <p>Profil</p>
+            </div>
+          </summary>
+        </details>
+      </li>
+      <li class="contentListItem">
+        <details>
+          <summary id="kullanicilar">
+            <div class="contentTitle">
+              <span class="material-icons">group</span>
+              <p>Kullanıcılar</p>
+            </div>
+          </summary>
+        </details>
+      </li>
+      <li class="contentListItem">
+        <details>
+          <summary>
+            <div class="contentTitle">
+              <span class="material-icons">settings</span>
+              <p>Ayarlar</p>
+            </div>
+          </summary>
+        </details>
+      </li>
+      <li class="contentListItem">
+        <summary>
+          <div class="contentTitle">
+            <span class="material-icons">report</span>
+            <p>Report</p>
+          </div>
+        </summary>
+      </li>
+    </ul>
+  </div>
+  <a href="http://{{server_ip}}/logout" id="logout">
+    <div class="logout">
+      <span class="material-icons" id="logoutIcon">logout</span>
+      <p>Çıkış yap</p>
+    </div>
+  </a>
+</div>
+<div class="content" id="embedContent">
+  <div class="nav">
+    <div class="nav-right">
+      <div class="darkmodeIcon" id="darkTheme">
+        <span class="material-icons" id="darkicon">nightlight</span>
+      </div>
+      <div class="userPic">
+        <img src="https://xsgames.co/randomusers/assets/avatars/male/78.jpg" height="50" width="50">
+      </div>
+    </div>
+  </div>
+  <div class="embed-container">
+    <iframe id="ilkIframe" class="main-canvas" src="" frameborder="0"></iframe>
+  </div>
+</div>
+
+
+{% endblock %}
+{% block footerJs %}
+{{ super() }}
+
+<script src="{{url_for('static', filename='js/index.js')}}"></script>
+
+{% endblock %}

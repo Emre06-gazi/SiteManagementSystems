@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+    <html lang="tr">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+        <link href="{{url_for('static', filename='css/main_iframe.css')}}" rel="stylesheet" />
+
+        {% block headerCss %}
+        {% endblock %}
+
+        {% block headerJs %}
+        {% endblock %}
+
+
+    </head>
+
+    <body>
+
+    <div class="container">
+
+            {% block mainContent %}
+            {% endblock %}
+
+        </div>
+
+        <footer>
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.min.js"></script>
+            <script type="text/javascript">
+            const server_ip = "{{server_ip}}";
+
+            </script>
+            <script src="{{url_for('static', filename='js/main_iframe.js')}}"></script>
+
+            {% block footerJs %}
+            {% endblock %}
+
+        </footer>
+    </body>
+
+
+</html>
